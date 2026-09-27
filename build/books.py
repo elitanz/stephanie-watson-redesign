@@ -267,7 +267,7 @@ def discussion_guide():
         <ol class="questions">{q_html}</ol>
         <div class="prose">
           <p>Read the <a href="http://www.scholastic.com/teachers/article/booktalk-elvis-and-olive" target="_blank" rel="noopener"><em>Elvis &amp; Olive</em> Book Talk by Scholastic</a></p>
-          <p>Are you a teacher or librarian? Learn about my <a href="school-visits.html">school presentations</a></p>
+          <p>Are you a teacher or librarian? Learn about my <a href="for-kids.html">school presentations</a></p>
         </div>
       </div>
       <div class="feature-img rv" style="position:sticky;top:110px"><img src="img/37179_443947918379_4141309_n.jpg" width="720" height="540" alt="" loading="lazy"></div>

@@ -2,6 +2,10 @@
 import html
 import re
 
+# Contact forms post here (FormSubmit.co). The first message ever sent triggers a one-time
+# "Activate Form" email to this inbox; nothing is delivered until she clicks it.
+FORM_ENDPOINT = "https://formsubmit.co/ajax/stephanie@plumlines.net"
+
 SITE_DESC = ("Stephanie Watson is an author and illustrator specializing in children's books. "
              "She offers author and artist visits to schools and libraries in the Twin Cities, "
              "greater Minnesota, and beyond.")
@@ -17,11 +21,9 @@ NAV = [
         ("Elvis &amp; Olive", "elvis-olive.html"),
         ("Elvis &amp; Olive: Super Detectives", "elvis-olive-super-detectives.html"),
     ]),
-    ("Author &amp; Illustrator Visits", "author-visits.html", "visits", [
-        ("School Visits", "school-visits.html"),
-        ("Library Storytimes &amp; Workshops", "library-storytimes.html"),
-        ("Other Presentations", "other-presentations.html"),
-        ("Testimonials", "testimonials.html"),
+    ("Teaching", "teaching.html", "teaching", [
+        ("For Kids", "for-kids.html"),
+        ("For Adults", "for-adults.html"),
     ]),
     ("About", "about.html", "about", [
         ("How to Become an Author", "how-to-become-an-author.html"),
@@ -69,7 +71,7 @@ def head(title, desc, og_image):
 <link rel="apple-touch-icon" href="img/cropped-IMG_5515-scaled-1-180x180.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400..700,50..100&family=Figtree:wght@400;500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400;1,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
@@ -110,7 +112,8 @@ _form_n = [0]
 def contact_form():
     _form_n[0] += 1
     n = _form_n[0]
-    return f"""<form class="js-contact" novalidate>
+    return f"""<form class="js-contact" action="{FORM_ENDPOINT}" method="post" novalidate>
+        <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
         <div class="field">
           <span class="lbl">Your name <span class="req">*</span></span>
           <div class="row">
@@ -171,10 +174,11 @@ def crumb(label, href):
     return f'<a class="crumb" href="{href}">{BACK} {label}</a>'
 
 
-def page_hero(h1, lede="", crumb_html="", center=False):
+def page_hero(h1, lede="", crumb_html="", center=False, kicker=""):
     lede_html = f'<p class="lede">{lede}</p>' if lede else ""
+    kicker_html = f'<span class="eyebrow">{kicker}</span>' if kicker else ""
     cls = "page-hero wrap center" if center else "page-hero wrap"
-    return f'<section class="{cls}"><div class="rv">{crumb_html}<h1>{h1}</h1>{lede_html}</div></section>'
+    return f'<section class="{cls}"><div class="rv">{crumb_html}{kicker_html}<h1>{h1}</h1>{lede_html}</div></section>'
 
 
 def video(yt_id, title, heading="", text=""):

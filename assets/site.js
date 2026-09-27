@@ -110,14 +110,32 @@
     window.addEventListener('hashchange',function(){ applyFilter((location.hash||'#all').slice(1)); });
   }
 
-  // Preview-only contact forms: validate, but don't send anywhere
+  // Contact forms: validate, then send through FormSubmit (the form's action) as JSON
   document.querySelectorAll('form.js-contact').forEach(function(form){
-    var note=form.querySelector('.form-note');
+    var note=form.querySelector('.form-note'), btn=form.querySelector('button[type=submit]');
+    function say(msg,ok){ note.textContent=msg; note.classList.toggle('ok',!!ok); }
     form.addEventListener('submit',function(e){
       e.preventDefault();
       var bad=[].slice.call(form.querySelectorAll('[required]')).filter(function(f){return !f.value.trim()||(f.type==='email'&&!/^\S+@\S+\.\S+$/.test(f.value));});
-      if(bad.length){ note.textContent='Please fill in all required fields.'; bad[0].focus(); return; }
-      note.textContent='Preview only — this mockup form doesn’t send messages yet.';
+      if(bad.length){ say('Please fill in all required fields.'); bad[0].focus(); return; }
+      var v=function(n){ return form.elements[n].value.trim(); };
+      var data={
+        name:v('first')+' '+v('last'), email:v('email'), message:v('message'),
+        page:document.title, _honey:form.elements._honey.value,
+        _subject:'New message from your website', _template:'table'
+      };
+      btn.disabled=true; say('Sending…');
+      fetch(form.action,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)})
+        .then(function(r){ return r.json().then(function(j){ return {ok:r.ok,j:j}; }); })
+        .then(function(res){
+          if(!res.ok||String(res.j.success)!=='true') throw new Error(res.j.message||'send failed');
+          form.reset(); say('Thank you! Your message was sent.',true);
+        })
+        .catch(function(err){
+          console.error('Contact form failed:',err);
+          say('Sorry, your message didn’t go through. Please try again in a moment.');
+        })
+        .then(function(){ btn.disabled=false; });
     });
   });
 })();

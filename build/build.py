@@ -15,7 +15,8 @@ sys.path.insert(0, HERE)
 
 import books  # noqa: E402
 import other  # noqa: E402
-from chrome import head, header, footer, SITE_DESC  # noqa: E402
+import teaching  # noqa: E402
+from chrome import head, header, footer, contact_form, SITE_DESC  # noqa: E402
 
 PAGES_JSON = os.path.join(SITE, "_crawl", "pages.json")
 HOME_MAIN = os.path.join(SITE, "_crawl", "home_main.html")
@@ -33,13 +34,17 @@ ROUTES = {
     "books/elvis-olive-super-detectives": "elvis-olive-super-detectives.html",
     "books/elvis-olive/chapter-one-elvis-olive": "elvis-olive-chapter-one.html",
     "books/elvis-olive/elvis-olive-discussion-guide": "elvis-olive-discussion-guide.html",
-    "author-visits": "author-visits.html",
-    "author-visits/school-visits": "school-visits.html",
-    "school-visits": "school-visits.html",
-    "author-visits/library-storytimes": "library-storytimes.html",
-    "author-visits/other-presentations": "other-presentations.html",
-    "author-visits/testimonials": "testimonials.html",
-    "school-visits/testimonials": "testimonials.html",
+    "teaching": "teaching.html",
+    "for-kids": "for-kids.html",
+    "for-adults": "for-adults.html",
+    # the old "Author & Illustrator Visits" pages now live inside Teaching
+    "author-visits": "teaching.html",
+    "author-visits/school-visits": "for-kids.html",
+    "school-visits": "for-kids.html",
+    "author-visits/library-storytimes": "for-kids.html#library",
+    "author-visits/other-presentations": "for-adults.html",
+    "author-visits/testimonials": "for-kids.html#testimonials",
+    "school-visits/testimonials": "for-kids.html#testimonials",
     "about": "about.html",
     "contact": "contact.html",
     "contact/how-to-become-an-author": "how-to-become-an-author.html",
@@ -62,7 +67,8 @@ def local_href(m):
         return f'{m.group(1)}img/{os.path.basename(path)}"'
     if path not in ROUTES:
         raise SystemExit(f"Unmapped internal link: {url}")
-    return f'{m.group(1)}{ROUTES[path]}{frag}"'
+    target = ROUTES[path]
+    return f'{m.group(1)}{target if "#" in target else target + frag}"'
 
 
 def rewrite_links(html):
@@ -72,8 +78,9 @@ def rewrite_links(html):
 def home():
     main = open(HOME_MAIN, encoding="utf-8").read()
     main = rewrite_links(main)
-    # the homepage's own contact form uses the shared preview-only handler
-    main = main.replace('<form class="rv" id="contact-form" novalidate>', '<form class="rv js-contact" novalidate>')
+    # the homepage's own contact form is swapped for the shared, working one
+    main, n = re.subn(r'<form class="rv" id="contact-form".*?</form>', lambda _: f'<div class="rv">{contact_form()}</div>', main, flags=re.S)
+    assert n == 1, "homepage contact form not found"
     return main
 
 
@@ -98,11 +105,9 @@ def page_table():
         "elvis-olive-super-detectives.html": ("Elvis & Olive: Super Detectives", "Elvis & Olive: Super Detectives, the sequel to Elvis & Olive by Stephanie Watson (Scholastic Press, 2010).", "books", books.super_detectives),
         "elvis-olive-chapter-one.html": ("Chapter One: Elvis & Olive", "Read the first chapter of Elvis & Olive by Stephanie Watson.", "books", lambda: books.chapter_one(pj)),
         "elvis-olive-discussion-guide.html": ("Elvis & Olive Discussion Guide", "Discussion questions for Elvis & Olive by Stephanie Watson, for classrooms and book clubs.", "books", books.discussion_guide),
-        "author-visits.html": ("Author & Illustrator Visits", "Book children’s author and illustrator Stephanie Watson for school visits, library storytimes, workshops and special events.", "visits", other.author_visits),
-        "school-visits.html": ("School Visits", "School presentations and writing workshops with children’s author and illustrator Stephanie Watson.", "visits", other.school_visits),
-        "library-storytimes.html": ("Library Storytimes & Workshops", "Library storytimes, presentations and adult writing workshops with Stephanie Watson.", "visits", other.library_storytimes),
-        "other-presentations.html": ("Other Presentations", "Keynote speeches and festival presentations by children’s author Stephanie Watson.", "visits", other.other_presentations),
-        "testimonials.html": ("Testimonials", "What teachers and organizers say about author visits with Stephanie Watson.", "visits", other.testimonials),
+        "teaching.html": ("Teaching", "Book children’s author and illustrator Stephanie Watson for school visits, library storytimes, adult writing workshops, keynotes and special events.", "teaching", teaching.teaching),
+        "for-kids.html": ("For Kids", "School presentations, writing workshops and library storytimes with children’s author and illustrator Stephanie Watson.", "teaching", teaching.for_kids),
+        "for-adults.html": ("For Adults", "Writing workshops, keynote speeches and festival presentations for adults with author and illustrator Stephanie Watson.", "teaching", teaching.for_adults),
         "about.html": ("About", "About Stephanie Watson, children’s book author and illustrator in Minneapolis, Minnesota.", "about", other.about),
         "how-to-become-an-author.html": ("How to Become an Author", "Resources from Stephanie Watson for anyone who wants to write children’s books.", "about", other.how_to_author),
         "videos.html": ("Videos", "Videos from Stephanie Watson: behind the book, her writing process, readings and the Word Slingers series.", "videos", other.videos),
