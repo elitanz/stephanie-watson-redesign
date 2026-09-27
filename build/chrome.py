@@ -181,7 +181,6 @@ def video(yt_id, title, heading="", text=""):
     h = f"<h3>{heading}</h3>" if heading else ""
     p = f"<p>{text}</p>" if text else ""
     t = html.escape(re.sub(r"<[^>]+>", "", title), quote=True)
-    return f"""<div class="video rv">{h}{p}<div class="frame" data-yt="{yt_id}">
-      <img src="https://i.ytimg.com/vi/{yt_id}/hqdefault.jpg" alt="" loading="lazy">
-      <button class="play" aria-label="Play video: {t}"><span><svg viewBox="0 0 24 24"><path d="M6 4l15 8-15 8z"/></svg></span></button>
+    return f"""<div class="video rv">{h}{p}<div class="frame">
+      <iframe src="https://www.youtube-nocookie.com/embed/{yt_id}?rel=0&amp;playsinline=1" title="{t}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
     </div></div>"""
