@@ -25,7 +25,7 @@ OG = "https://www.stephanie-watson.com/wp-content/uploads/2020/09/Pencilvania_Lo
 # Old live-site paths -> new local pages
 ROUTES = {
     "": "index.html",
-    "books": "books.html",
+    "books": "index.html#books",  # the Books landing page was retired (Sept 29); the home page lists them
     "books/pencilvania": "pencilvania.html",
     "books/best-friends-in-the-universe": "best-friends-in-the-universe.html",
     "books/behold-a-baby": "behold-a-baby.html",
@@ -98,7 +98,6 @@ def page_table():
     pj = PAGES_JSON
     return {
         "index.html": (None, SITE_DESC, "home", home),
-        "books.html": ("Children’s Books", "Children’s books by Minneapolis author Stephanie Watson: Pencilvania, Best Friends in the Universe, Behold! A Baby, The Wee Hours and the Elvis & Olive novels.", "books", books.books_overview),
         "pencilvania.html": ("Pencilvania", "Pencilvania, a middle-grade novel by Stephanie Watson, illustrated by Sofia Moore (Sourcebooks, 2021).", "books", books.pencilvania),
         "best-friends-in-the-universe.html": ("Best Friends in the Universe", "Best Friends in the Universe by Stephanie Watson, illustrated by LeUyen Pham (Scholastic/Orchard Books).", "books", books.best_friends),
         "behold-a-baby.html": ("Behold! A Baby", "Behold! A Baby by Stephanie Watson, illustrated by Joy Ang (Bloomsbury). 2016 Minnesota Book Award finalist.", "books", books.behold),
@@ -146,6 +145,36 @@ def verify(files):
     return problems
 
 
+REDIRECT = """<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<title>This page has moved | Stephanie Watson</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="{to}">
+<meta http-equiv="refresh" content="0; url={to}">
+<script>location.replace("{to}" + ("{to}".indexOf("#") < 0 ? location.hash : ""))</script>
+</head><body><p>This page has moved. <a href="{to}">Continue to the new page</a>.</p></body></html>
+"""
+
+
+def write_redirects():
+    """Her old WordPress addresses (e.g. /author-visits/school-visits/) still get traffic, so each one
+    gets a tiny page at that same path that forwards to its new home. GitHub Pages can't do
+    server-side redirects; this is the static-site equivalent."""
+    made = []
+    for old, new in ROUTES.items():
+        if not old:
+            continue
+        folder = os.path.join(SITE, *old.split("/"))
+        os.makedirs(folder, exist_ok=True)
+        to = "../" * len(old.split("/")) + new
+        with open(os.path.join(folder, "index.html"), "w", encoding="utf-8") as f:
+            f.write(REDIRECT.format(to=to))
+        if not os.path.exists(os.path.join(SITE, new.split("#")[0])):
+            raise SystemExit(f"redirect /{old}/ points at missing page {new}")
+        made.append(old)
+    return made
+
+
 def main():
     ig = ig_icon()
     written = []
@@ -154,7 +183,8 @@ def main():
         write_safely(os.path.join(SITE, fn), html)
         written.append(fn)
     problems = verify(written)
-    print(f"built {len(written)} pages")
+    redirects = write_redirects()
+    print(f"built {len(written)} pages + {len(redirects)} redirects from her old addresses")
     if problems:
         print("\n".join(problems))
         raise SystemExit(1)

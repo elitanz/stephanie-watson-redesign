@@ -20,8 +20,8 @@ LOGOS = {
     "Hennepin County Library.png": "hennepin-county-library.png", "Loft logo_large.png": "loft.png",
     "MN_State_Fair_Logo.jpg": "mn-state-fair.png", "Mall of America Logo.jpg": "mall-of-america.png",
     "Seward Montessori logo.png": "seward-montessori.png", "The Musicant Group logo.webp": "musicant-group.png",
-    "UST logo.png": "st-thomas.png", "hamline university logo 2.jpg": "hamline.png",
-    "ramsey county library.png": "ramsey-county-library.png", "mia logo.png": "mia.png", "mps logo.png": "mps.png",
+    "UST logo.png": "st-thomas.png",
+    "ramsey county library.png": "ramsey-county-library.png", "mps logo.png": "mps.png",
     "st paul saints.png": "st-paul-saints.png",
 }
 
@@ -53,8 +53,21 @@ def convert(src, dst):
     return out.size
 
 
+# She picked these two as SVG wordmarks. They're vector, so recolor them to ink rather than rasterize.
+SVG_LOGOS = {
+    "Mia_Isolated_Wordmark_100K.svg": ("mia.svg", lambda s: s.replace("<svg ", '<svg fill="#2a2521" ', 1)),  # unfilled = black
+    "hamline university.svg": ("hamline.svg", lambda s: s.replace("#FFFFFF", "#2a2521")),               # was white-on-dark
+}
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
+    for src, (name, recolor) in SVG_LOGOS.items():
+        with open(os.path.join(SRC, src), encoding="utf-8") as f:
+            svg = recolor(f.read())
+        with open(os.path.join(OUT, name), "w", encoding="utf-8") as f:
+            f.write(svg)
+        print(f"{name:32s} (svg)")
     for src, name in LOGOS.items():
         w, h = convert(os.path.join(SRC, src), os.path.join(OUT, name))
         print(f"{name:32s} {w}x{h}")

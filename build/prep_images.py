@@ -26,20 +26,19 @@ PHOTOS = {
     "All website photos/2026/08/IMG_6832-scaled.jpg": "about_photo_studio.jpg",
     "2026 Photos/StephanieWatsonSketchbook.JPG": "contact_sketchbook.jpg",
     "2026 Photos/StephanieAge3Drawing copy.jpeg": "contact_age-3-drawing.jpg",
-    # For Adults: recent classes and events
-    "2026 Photos/CreativeWorkshop.jpg": "adults_grid_creative-workshop.jpg",
-    "2026 Photos/IMG_4807 copy.JPG": "adults_grid_drawing-games-room.jpg",
+    # For Adults "Recent classes and events" — her picks (content map, For Adults photo table)
+    "2026 Photos/Stephanie Watson Speaker.JPG": "adults_grid_confab-speaker.jpg",
+    "2026 Photos/IMG_4809 copy.JPG": "grid_confab-drawings-held-up.jpg",
     "2026 Photos/MusicantWorkshop_Aug2022 copy.jpeg": "adults_grid_musicant-workshop.jpg",
     "2026 Photos/StephanieWatsonDrawingWorkshop copy.jpeg": "adults_grid_drawing-workshop.jpg",
-    "2026 Photos/StephanieWatsonAuthorTwinCities copy.jpeg": "adults_grid_author-talk.jpg",
-    "2026 Photos/467767647_10161805045534140_8914562078913488725_n.jpg": "adults_grid_mcba-parts-of-a-whole.jpg",
-    # For Kids: past events (picked so children's faces don't show up close)
-    "2026 Photos/IMG_6574.HEIC": "kids_past_storytime-red-tent.jpg",
+    "2026 Photos/StephanieWatsonAuthorMinnesota_BFITU-launch-scaled.jpeg": "adults_grid_keynote.jpg",
+    "2026 Photos/StephanieWatsonAuthorTwinCities copy.jpeg": "adults_grid_moon-palace-launch.jpg",
+    # For Kids "Past Events" — her picks (content map, For Kids photo table)
     "2026 Photos/Mall of America Reading1.jpeg": "kids_past_mall-of-america-reading.jpg",
-    "2026 Photos/ToddlerStoryTimeMOA_SWatson_1 copy.jpeg": "kids_past_toddler-storytime-moa.jpg",
-    "2026 Photos/Bancroft photos/IMG_5969.jpg": "kids_past_comics-lab.jpg",
     "2026 Photos/Screen Shot 2020-08-22 at 7.58.45 AM copy.png": "kids_past_saints-game.jpg",
-    "2026 Photos/Alphabet Forest Minnesota State Fair.jpg": "kids_past_alphabet-forest.jpg",
+    "2026 Photos/SchoolPresentation_SWatson_2 copy.jpeg": "kids_past_school-assembly.jpg",
+    "2026 Photos/IMG_6576.JPG": "kids_past_edina-outdoor-storytime.jpg",
+    "2026 Photos/BattleoftheBooks_Brainerd_2023_2 copy.jpg": "kids_past_brainerd-book-club.jpg",
     # new book tiles + portfolio art
     "2026 Photos/EO_Cover_Square-500x500.jpg": "EO_Cover_Square-500x500.jpg",
     "2026 Photos/ElvisOlive_SuperDetectives_Square-500x500.jpeg": "ElvisOlive_SuperDetectives_Square-500x500.jpg",

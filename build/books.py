@@ -4,7 +4,7 @@ import json
 import re
 from chrome import (ARROW, STAR, EXT, ext, crumb, page_hero, video, contact_section)
 
-BOOKS_CRUMB = crumb("Children’s Books", "books.html")
+BOOKS_CRUMB = crumb("Children’s Books", "index.html#books")
 
 
 def btn(label, href, kind="btn-fill", extra=""):
@@ -57,27 +57,6 @@ def videos_band(items, one=False):
 
 
 # ---------------------------------------------------------------- overview
-SHELF = [
-    ("pencilvania.html", "img/Pencilvania.jpg", 595, 893, "Pencilvania", "illustrated by Sofia Moore"),
-    ("best-friends-in-the-universe.html", "img/Jacket_BFITU_Small.jpg", 1167, 1400, "Best Friends in the Universe", "illustrated by LeUyen Pham"),
-    ("behold-a-baby.html", "img/BeholdABabyCover.jpg", 743, 837, "Behold! A Baby", "illustrated by Joy Ang"),
-    ("the-wee-hours.html", "img/Wee_hours_Jkt2P_CoverOnly-1.jpg", 1223, 1400, "The Wee Hours", "illustrated by Mary GrandPré"),
-    ("elvis-olive.html", "img/EO-1-FNL-CVR_smaller.jpeg", 600, 873, "Elvis &amp; Olive", ""),
-    ("elvis-olive-super-detectives.html", "img/ElvisOlive_SuperDetectives_HighRes-1.jpg", 600, 814, "Elvis &amp; Olive: Super Detectives", ""),
-]
-
-
-def books_overview():
-    cards = []
-    for href, src, w, h, name, by in SHELF:
-        by_html = by
-        cards.append(f'<a class="shelf-book rv" href="{href}"><span class="shelf-cover"><img src="{src}" width="{w}" height="{h}" alt="{name} book cover" loading="lazy"></span>'
-                     f'<span class="shelf-title">{name}<span class="shelf-by">{by_html}</span></span></a>')
-    return f"""{page_hero("Books", "I write books for young readers. Thanks for checking them out!", center=True)}
-  <section class="wrap sec pt0"><div class="shelf">{"".join(cards)}</div></section>
-  {contact_section("Have a question or comment about my children’s books? I’d love to hear from you!")}"""
-
-
 # ---------------------------------------------------------------- book pages
 def pencilvania():
     after = videos_band([

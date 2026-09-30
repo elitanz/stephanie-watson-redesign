@@ -89,7 +89,7 @@
   // Photo grids: click a photo to see it larger, arrow through the rest
   document.querySelectorAll('.photo-grid').forEach(function(grid){
     var links=[].slice.call(grid.querySelectorAll('a[data-group]'));
-    var items=links.map(function(a){ var im=a.querySelector('img'); return {src:a.getAttribute('href'),alt:im?im.alt:'',caption:''}; });
+    var items=links.map(function(a){ var im=a.querySelector('img'); return {src:a.getAttribute('href'),alt:im?im.alt:'',caption:a.dataset.caption||''}; });
     links.forEach(function(a,i){ a.addEventListener('click',function(e){ e.preventDefault(); openLightbox(items,i); }); });
   });
 

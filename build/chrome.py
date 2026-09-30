@@ -13,7 +13,7 @@ SITE_DESC = ("Stephanie Watson is an author and illustrator specializing in chil
 # (label, href, section-key, children)
 NAV = [
     ("Home", "index.html", "home", []),
-    ("Children’s Books", "books.html", "books", [
+    ("Children’s Books", "index.html#books", "books", [
         ("Pencilvania", "pencilvania.html"),
         ("Best Friends in the Universe", "best-friends-in-the-universe.html"),
         ("Behold! A Baby", "behold-a-baby.html"),

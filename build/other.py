@@ -20,7 +20,7 @@ def about():
     <div class="book-layout about-layout">
       <div class="rv">
         <div class="prose">{text}</div>
-        <div class="btn-row"><a class="btn btn-fill" href="books.html">Books {ARROW}</a><a class="btn btn-line" href="teaching.html">Teaching &amp; Speaking</a></div>
+        <div class="btn-row"><a class="btn btn-fill" href="index.html#books">Books {ARROW}</a><a class="btn btn-line" href="teaching.html">Teaching &amp; Speaking</a></div>
       </div>
       <div class="book-aside rv"><div class="photo-wrap"><img src="img/about_portrait_2026.jpg" width="1200" height="1600" alt="Stephanie Watson" style="aspect-ratio:4/5;object-position:center 30%" fetchpriority="high"></div></div>
     </div>

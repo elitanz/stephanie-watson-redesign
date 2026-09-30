@@ -9,27 +9,27 @@ from chrome import ARROW, crumb, contact_section
 TEACHING_CRUMB = crumb("Teaching &amp; Speaking", "teaching.html")
 CONNECT = "Let’s connect"
 
-# Partner logos (img/logos/). Which logos go where is Eli's pick; Stephanie hasn't set an order yet.
+# Partner logos (img/logos/). Which logos go on each page, and their order, are from her content map.
 LOGOS = {
     "asi": ("asi.png", 522, 240, "American Swedish Institute"),
     "mps": ("mps.png", 800, 122, "Minneapolis Public Schools"),
     "hennepin": ("hennepin-county-library.png", 239, 240, "Hennepin County Library"),
     "ramsey": ("ramsey-county-library.png", 227, 240, "Ramsey County Library"),
-    "mia": ("mia.png", 476, 240, "Minneapolis Institute of Art"),
+    "mia": ("mia.svg", 468, 35, "Minneapolis Institute of Art (Mia)"),
     "loft": ("loft.png", 349, 176, "The Loft Literary Center"),
     "fair": ("mn-state-fair.png", 416, 240, "Minnesota State Fair"),
     "saints": ("st-paul-saints.png", 184, 240, "St. Paul Saints"),
     "bestbuy": ("best-buy.png", 410, 240, "Best Buy"),
     "faceit": ("face-it.png", 153, 179, "Face It Foundation"),
-    "hamline": ("hamline.png", 268, 240, "Hamline University"),
+    "hamline": ("hamline.svg", 386, 59, "Hamline University"),
     "stthomas": ("st-thomas.png", 700, 140, "University of St. Thomas"),
     "seward": ("seward-montessori.png", 225, 240, "Seward Montessori"),
     "musicant": ("musicant-group.png", 677, 240, "The Musicant Group"),
     "moa": ("mall-of-america.png", 426, 240, "Mall of America"),
 }
-TEACHING_LOGOS = ["asi", "mps", "hennepin", "ramsey", "mia", "loft", "fair", "saints", "bestbuy", "faceit", "hamline", "stthomas"]
-KIDS_LOGOS = ["mps", "asi", "hennepin", "seward", "fair"]
-ADULT_LOGOS = ["mia", "loft", "bestbuy", "faceit", "musicant", "hamline"]
+TEACHING_LOGOS = ["asi", "mps", "seward", "mia", "loft", "hennepin", "ramsey", "stthomas", "hamline", "fair", "moa", "saints"]
+KIDS_LOGOS = ["asi", "mps", "fair", "moa", "saints"]
+ADULT_LOGOS = ["mia", "loft", "stthomas", "bestbuy", "faceit", "musicant"]
 
 # Shared testimonials (her wording; she uses some on more than one page)
 RAMGREN = ("It is a joy to work with Stephanie Watson and the residency she does with my 1st graders. She brings a level of enthusiasm and engagement that is amazing! She purposefully seeks input in her lessons from all of my students and makes connections with them in a very short time. Students feel seen by her and then are more invested in their work with her. She is so creative and draws out creativity from my students too.",
@@ -55,12 +55,14 @@ def sec_head(kicker, title, lede="", center=False):
 
 
 LOGO_AREA = 9000      # every logo gets about the same visual area (px²), so wide and tall ones balance
-LOGO_MAX_W, LOGO_MAX_H = 200, 84
+LOGO_MAX_W, LOGO_MAX_H = 260, 84
+LOGO_MIN_H = 20       # long one-line wordmarks (Mia, Hamline) stay readable
 
 
 def logo_width(w, h):
     aspect = w / h
-    return round(min((LOGO_AREA * aspect) ** 0.5, LOGO_MAX_W, LOGO_MAX_H * aspect))
+    by_area = max((LOGO_AREA * aspect) ** 0.5, LOGO_MIN_H * aspect)
+    return round(min(by_area, LOGO_MAX_W, LOGO_MAX_H * aspect))
 
 
 def logo_row(keys, cls):
@@ -85,9 +87,10 @@ def hero_split(kicker, h1, lede, img, w, h, alt="", crumb_html=""):
 
 
 def photo_grid(photos):
-    """Photos that open larger on click. `photos` = (file, w, h). She hasn't written captions yet."""
-    items = "".join(f'<li><a href="img/{f}" data-group><img src="img/{f}" width="{w}" height="{h}" alt="" loading="lazy"></a></li>'
-                    for f, w, h in photos)
+    """Captioned photos that open larger on click. `photos` = (file, w, h, caption, alt) from her content map."""
+    items = "".join(f'<li><figure><a href="img/{f}" data-group data-caption="{cap}"><img src="img/{f}" width="{w}" height="{h}" alt="{alt}" loading="lazy"></a>'
+                    f'<figcaption>{cap}</figcaption></figure></li>'
+                    for f, w, h, cap, alt in photos)
     return f'<ul class="photo-grid rv">{items}</ul>'
 
 
@@ -166,12 +169,12 @@ def _residencies():
 
 
 KIDS_PAST_EVENTS = [
-    ("kids_past_storytime-red-tent.jpg", 1200, 1600),
-    ("kids_past_mall-of-america-reading.jpg", 1440, 1440),
-    ("kids_past_comics-lab.jpg", 1600, 1287),
-    ("kids_past_saints-game.jpg", 1600, 898),
-    ("kids_past_toddler-storytime-moa.jpg", 1440, 1440),
-    ("kids_past_alphabet-forest.jpg", 1200, 1600),
+    ("kids_past_mall-of-america-reading.jpg", 1440, 1440, "Storytime at the Mall of America", ""),
+    ("kids_past_saints-game.jpg", 1600, 898, "Reading at a St. Paul Saints game", ""),
+    ("kids_past_school-assembly.jpg", 1600, 1200, "School assembly", ""),
+    ("kids_past_edina-outdoor-storytime.jpg", 1600, 1200, "Outdoor storytime in Edina", ""),
+    ("grid_confab-drawings-held-up.jpg", 1600, 1200, "Drawing Games workshop at Confab Content Strategy Conference", ""),
+    ("kids_past_brainerd-book-club.jpg", 1600, 1066, "Book club in Brainerd, MN", ""),
 ]
 
 
@@ -211,12 +214,16 @@ def _offer(title, body, examples, fmt, label="", button=""):
 
 
 ADULT_PHOTOS = [
-    ("adults_grid_drawing-games-room.jpg", 1600, 1200),
-    ("adults_grid_musicant-workshop.jpg", 1600, 1199),
-    ("adults_grid_author-talk.jpg", 1600, 1066),
-    ("adults_grid_creative-workshop.jpg", 1427, 1062),
-    ("adults_grid_drawing-workshop.jpg", 1600, 1178),
-    ("adults_grid_mcba-parts-of-a-whole.jpg", 960, 960),
+    ("adults_grid_confab-speaker.jpg", 1600, 1066, "Drawing games at Confab Content Strategy Conference",
+     "Stephanie Watson leads a group of conference attendees in playful drawing exercises."),
+    ("grid_confab-drawings-held-up.jpg", 1600, 1200, "Drawing games at Confab Content Strategy Conference",
+     "Workshop participants holding up their drawings"),
+    ("adults_grid_musicant-workshop.jpg", 1600, 1199, "Workshop with the Musicant Group",
+     "Stephanie Watson leading a small workshop around a table"),
+    ("adults_grid_drawing-workshop.jpg", 1600, 1178, "Adult drawing workshop", "Adults drawing together at a workshop table"),
+    ("adults_grid_keynote.jpg", 1600, 1066, "Keynote speech", "Stephanie Watson speaking to an audience"),
+    ("adults_grid_moon-palace-launch.jpg", 1600, 1066, "Book launch at Moon Palace Books",
+     "Stephanie Watson speaking on stage with a microphone"),
 ]
 
 
