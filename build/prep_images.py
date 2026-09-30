@@ -39,6 +39,7 @@ PHOTOS = {
     "2026 Photos/SchoolPresentation_SWatson_2 copy.jpeg": "kids_past_school-assembly.jpg",
     "2026 Photos/IMG_6576.JPG": "kids_past_edina-outdoor-storytime.jpg",
     "2026 Photos/BattleoftheBooks_Brainerd_2023_2 copy.jpg": "kids_past_brainerd-book-club.jpg",
+    "2026 Photos/Bancroft photos/IMG_5969.jpg": "kids_past_comics-lab-shareout.jpg",  # Sept 30: replaces the Confab photo
     # new book tiles + portfolio art
     "2026 Photos/EO_Cover_Square-500x500.jpg": "EO_Cover_Square-500x500.jpg",
     "2026 Photos/ElvisOlive_SuperDetectives_Square-500x500.jpeg": "ElvisOlive_SuperDetectives_Square-500x500.jpg",

@@ -6,9 +6,8 @@ import re
 # "Activate Form" email to this inbox; nothing is delivered until she clicks it.
 FORM_ENDPOINT = "https://formsubmit.co/ajax/stephanie@plumlines.net"
 
-SITE_DESC = ("Stephanie Watson is an author and illustrator specializing in children's books. "
-             "She offers author and artist visits to schools and libraries in the Twin Cities, "
-             "greater Minnesota, and beyond.")
+SITE_DESC = ("Stephanie Watson is an author and illustrator who offers visits to schools and libraries in the "
+             "Twin Cities, greater Minnesota, and beyond. She also leads workshops for both kids and adults.")
 
 # (label, href, section-key, children)
 NAV = [
@@ -25,9 +24,7 @@ NAV = [
         ("For Kids", "for-kids.html"),
         ("For Adults", "for-adults.html"),
     ]),
-    ("About", "about.html", "about", [
-        ("How to Become an Author", "how-to-become-an-author.html"),
-    ]),
+    ("About", "about.html", "about", []),
     ("Newsletter", "https://thepennycarnival.substack.com/subscribe", "newsletter", []),
     ("Videos", "videos.html", "videos", []),
     ("Contact", "contact.html", "contact", []),
@@ -51,9 +48,8 @@ def ext(href):
 
 
 def head(title, desc, og_image):
-    full = "Stephanie Watson | Children's Book Author and Illustrator | Author Visits" if title is None \
-        else f"{title} | Stephanie Watson"
-    t, d = html.escape(full), html.escape(desc)
+    """`title` is the page's full <title>, exactly as Stephanie wrote it (Sept 30 titles table)."""
+    t, d = html.escape(title), html.escape(desc)
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>

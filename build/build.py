@@ -49,7 +49,7 @@ ROUTES = {
     "school-visits/testimonials": "teaching.html",
     "about": "about.html",
     "contact": "contact.html",
-    "contact/how-to-become-an-author": "how-to-become-an-author.html",
+    "contact/how-to-become-an-author": "contact.html",  # page deleted Sept 30; she wants it to land on Contact
     "videos": "videos.html",
     "portfolio": "portfolio.html",
 }
@@ -93,27 +93,35 @@ def ig_icon():
     return svg
 
 
-# filename -> (title or None for home, description, section, body-builder)
+# Retired pages that were plain .html files in this preview -> where they forward now
+OLD_FILES = {
+    "how-to-become-an-author.html": "contact.html",  # deleted Sept 30
+}
+
+SW = " | Stephanie Watson"
+
+
+# filename -> (full <title>, description, section, body-builder)
+# Titles and descriptions are Stephanie's, from her Sept 30 table. Use them exactly; don't reword.
 def page_table():
     pj = PAGES_JSON
     return {
-        "index.html": (None, SITE_DESC, "home", home),
-        "pencilvania.html": ("Pencilvania", "Pencilvania, a middle-grade novel by Stephanie Watson, illustrated by Sofia Moore (Sourcebooks, 2021).", "books", books.pencilvania),
-        "best-friends-in-the-universe.html": ("Best Friends in the Universe", "Best Friends in the Universe by Stephanie Watson, illustrated by LeUyen Pham (Scholastic/Orchard Books).", "books", books.best_friends),
-        "behold-a-baby.html": ("Behold! A Baby", "Behold! A Baby by Stephanie Watson, illustrated by Joy Ang (Bloomsbury). 2016 Minnesota Book Award finalist.", "books", books.behold),
-        "the-wee-hours.html": ("The Wee Hours", "The Wee Hours by Stephanie Watson, illustrated by Mary GrandPré (Disney-Hyperion).", "books", books.wee_hours),
-        "elvis-olive.html": ("Elvis & Olive", "Elvis & Olive, a novel by Stephanie Watson (Scholastic Press, 2008).", "books", books.elvis_olive),
-        "elvis-olive-super-detectives.html": ("Elvis & Olive: Super Detectives", "Elvis & Olive: Super Detectives, the sequel to Elvis & Olive by Stephanie Watson (Scholastic Press, 2010).", "books", books.super_detectives),
-        "elvis-olive-chapter-one.html": ("Chapter One: Elvis & Olive", "Read the first chapter of Elvis & Olive by Stephanie Watson.", "books", lambda: books.chapter_one(pj)),
-        "elvis-olive-discussion-guide.html": ("Elvis & Olive Discussion Guide", "Discussion questions for Elvis & Olive by Stephanie Watson, for classrooms and book clubs.", "books", books.discussion_guide),
-        "teaching.html": ("Teaching & Speaking", "Book children’s author and illustrator Stephanie Watson for school and library visits, residencies, adult drawing and writing workshops, and talks.", "teaching", teaching.teaching),
-        "for-kids.html": ("For Kids", "School and library presentations, writing workshops and residencies for kids with children’s author and illustrator Stephanie Watson.", "teaching", teaching.for_kids),
-        "for-adults.html": ("For Adults", "Drawing and writing workshops, multi-session classes, talks and keynotes for adults with author and illustrator Stephanie Watson.", "teaching", teaching.for_adults),
-        "about.html": ("About", "About Stephanie Watson, children’s book author and illustrator in Minneapolis, Minnesota.", "about", other.about),
-        "how-to-become-an-author.html": ("How to Become an Author", "Resources from Stephanie Watson for anyone who wants to write children’s books.", "about", other.how_to_author),
-        "videos.html": ("Videos", "Videos from Stephanie Watson: behind the book, her writing process, readings and the Word Slingers series.", "videos", other.videos),
-        "contact.html": ("Contact", "Contact Stephanie Watson about workshops, presentations, school visits, or general questions.", "contact", other.contact),
-        "portfolio.html": ("Portfolio", "Illustrations and artwork handmade by Stephanie Watson.", "home", other.portfolio),
+        "index.html": ("Stephanie Watson | Children's Book Author and Illustrator | Teaching and Speaking", SITE_DESC, "home", home),
+        "pencilvania.html": ("Pencilvania" + SW, "Pencilvania, a middle-grade novel by Stephanie Watson, illustrated by Sofia Moore (Sourcebooks).", "books", books.pencilvania),
+        "best-friends-in-the-universe.html": ("Best Friends in the Universe" + SW, "Best Friends in the Universe by Stephanie Watson, illustrated by LeUyen Pham (Scholastic/Orchard Books).", "books", books.best_friends),
+        "behold-a-baby.html": ("Behold! A Baby" + SW, "Behold! A Baby by Stephanie Watson, illustrated by Joy Ang (Bloomsbury). 2016 Minnesota Book Award finalist.", "books", books.behold),
+        "the-wee-hours.html": ("The Wee Hours" + SW, "The Wee Hours by Stephanie Watson, illustrated by Mary GrandPré (Disney-Hyperion).", "books", books.wee_hours),
+        "elvis-olive.html": ("Elvis & Olive" + SW, "Elvis & Olive, a novel by Stephanie Watson (Scholastic Press).", "books", books.elvis_olive),
+        "elvis-olive-super-detectives.html": ("Elvis & Olive: Super Detectives" + SW, "Elvis & Olive: Super Detectives, the sequel to Elvis & Olive by Stephanie Watson (Scholastic Press).", "books", books.super_detectives),
+        "elvis-olive-chapter-one.html": ("Chapter One: Elvis & Olive" + SW, "Read the first chapter of Elvis & Olive by Stephanie Watson.", "books", lambda: books.chapter_one(pj)),
+        "elvis-olive-discussion-guide.html": ("Elvis & Olive Discussion Guide" + SW, "Discussion questions for Elvis & Olive by Stephanie Watson, for classrooms and book clubs.", "books", books.discussion_guide),
+        "teaching.html": ("Author & Illustrator Visits | Twin Cities | Minnesota", "Hire children’s author and illustrator Stephanie Watson for school and library visits, residencies, adult drawing and writing workshops, and talks.", "teaching", teaching.teaching),
+        "for-kids.html": ("Author & Illustrator Visits | School and Library Presentations | MN", "School and library presentations, writing workshops and residencies for kids with children’s author and illustrator Stephanie Watson.", "teaching", teaching.for_kids),
+        "for-adults.html": ("Writing and Drawing Workshops for Adults" + SW, "Drawing and writing workshops, multi-session classes, talks and keynotes for adults with author and illustrator Stephanie Watson.", "teaching", teaching.for_adults),
+        "about.html": ("About" + SW, "About Stephanie Watson, children’s book author and illustrator in Minneapolis, Minnesota.", "about", other.about),
+        "videos.html": ("Videos" + SW, "Behind-the-scenes and craft videos from children’s book author Stephanie Watson.", "videos", other.videos),
+        "contact.html": ("Contact" + SW, "Contact Stephanie Watson about workshops, presentations, school visits, or with general questions.", "contact", other.contact),
+        "portfolio.html": ("Portfolio" + SW, "Illustrations and artwork handmade by Stephanie Watson.", "home", other.portfolio),
     }
 
 
@@ -171,6 +179,10 @@ def write_redirects():
             f.write(REDIRECT.format(to=to))
         if not os.path.exists(os.path.join(SITE, new.split("#")[0])):
             raise SystemExit(f"redirect /{old}/ points at missing page {new}")
+        made.append(old)
+    for old, new in OLD_FILES.items():
+        with open(os.path.join(SITE, old), "w", encoding="utf-8") as f:
+            f.write(REDIRECT.format(to=new))
         made.append(old)
     return made
 

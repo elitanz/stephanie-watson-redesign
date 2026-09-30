@@ -249,6 +249,6 @@ def discussion_guide():
           <p>Are you a teacher or librarian? Learn about my <a href="for-kids.html">school presentations</a></p>
         </div>
       </div>
-      <div class="feature-img rv" style="position:sticky;top:110px"><img src="img/37179_443947918379_4141309_n.jpg" width="720" height="540" alt="" loading="lazy"></div>
+      <div class="feature-img rv" style="position:sticky;top:110px"><img src="img/37179_443947918379_4141309_n.jpg" width="720" height="540" alt="Author Stephanie Watson reading from one of her books." loading="lazy"></div>
     </div>
   </section>"""

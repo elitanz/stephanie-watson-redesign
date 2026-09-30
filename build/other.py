@@ -1,7 +1,7 @@
 """Visits, about, contact, videos, portfolio pages."""
-from chrome import ARROW, EXT, crumb, page_hero, video, contact_section, contact_form
+from chrome import ARROW, page_hero, video, contact_section, contact_form
 
-# ---------------------------------------------------------------- about / contact / how-to
+# ---------------------------------------------------------------- about / contact
 NEWSLETTER = """<section class="sec news-band" id="newsletter"><div class="wrap">
       <div class="sec-head rv"><h2>Newsletter</h2></div>
       <div class="news-card rv"><iframe src="https://thepennycarnival.substack.com/embed" title="Subscribe to The Penny Carnival on Substack" loading="lazy" scrolling="no"></iframe></div>
@@ -24,10 +24,6 @@ def about():
       </div>
       <div class="book-aside rv"><div class="photo-wrap"><img src="img/about_portrait_2026.jpg" width="1200" height="1600" alt="Stephanie Watson" style="aspect-ratio:4/5;object-position:center 30%" fetchpriority="high"></div></div>
     </div>
-    <div class="about-photos">
-      <img class="rv" src="img/about_photo_studio.jpg" width="1600" height="1278" alt="" loading="lazy">
-      <img class="rv" src="img/StephanieWatsonAuthorMinnesota_BFITU-launch-scaled.jpeg" width="1400" height="933" alt="" loading="lazy">
-    </div>
   </section>
   {NEWSLETTER}
   {contact_section()}"""
@@ -43,32 +39,7 @@ def contact():
           <img src="img/contact_sketchbook.jpg" width="1200" height="1600" alt="Stephanie Watson sketching on the beach">
           <img src="img/contact_age-3-drawing.jpg" width="1045" height="1045" alt="Stephanie Watson at age three, beside her chalkboard drawing">
         </div>
-        <div class="side-card rv">
-        <div class="body"><strong>Want to write children’s books?</strong>
-          <p>If you’re interested in becoming an author but aren’t sure where to start, these resources can help.</p>
-          <a class="btn btn-fill btn-sm" href="how-to-become-an-author.html">Go {ARROW}</a></div>
-        </div>
       </aside>
-    </div>
-  </section>"""
-
-
-def how_to_author():
-    res = [
-        ("The Loft Literary Center", "https://www.loft.org/", "This Twin Cities-based writing center was where I took classes after college graduation. Loft classes helped me further my writing technique and plug into the kid lit community. The in-person classes are great, but if you’re out of town, you’re in luck: the Loft offers online classes."),
-        ("Children’s Writer’s &amp; Illustrator’s Market", "", "This book, updated annually, is a vital resource for both new and experienced writers. The front section is chock full of answers to your questions about how to get an agent, how to craft a query letter, and more. The second half of the book is a directory of agents and publishers. Buy this book! It’s a lot of great info for $30. Not including a link to buy, since there’s a new version every year. Just Google it up and you’ll find the latest edition."),
-        ("SCBWI", "http://www.scbwi.org/", "If you’re serious about creating children’s books, consider joining the Society of Children’s Book Writers &amp; Illustrators. They host tons of events and workshops that can help you get your footing in the world of kid lit."),
-        ("QueryTracker", "https://querytracker.net/index.php", "If you’ve put your manuscript through the rigors of peer critique and revision and you think you’re ready to start querying agents, check out this scrappy little website. Once you create a free account, you can browse a directory of agents, read about what each is looking for, find contact info, and connect with other brave querying souls like yourself."),
-    ]
-    cards = "".join(
-        f'<div class="resource rv"><h3>' + (f'<a href="{h}" target="_blank" rel="noopener">{t} {EXT}</a>' if h else t) + f'</h3><p>{p}</p></div>'
-        for t, h, p in res)
-    lede = "Are you interested in writing children’s books? Awesome! I was once right where you are, excited about the idea of writing a book but not sure where to begin. Below are a few resources to get you started."
-    return f"""{page_hero("How to Become an Author", lede, crumb_html=crumb("About", "about.html"))}
-  <section class="wrap sec pt0">
-    <div class="feature" style="align-items:start">
-      <div><div class="resources">{cards}</div><p class="rv signoff">Good luck!</p></div>
-      <div class="feature-img rv" style="position:sticky;top:110px"><img src="img/12967392_10153457014323344_1870109107206466787_o-1.jpg" width="1400" height="1400" alt="" loading="lazy" style="aspect-ratio:1"></div>
     </div>
   </section>"""
 

@@ -101,18 +101,18 @@ def teaching():
              "community spaces. Through presentations and keynote speeches, I offer a window into the artistic process. Explore the "
              "ready-made options below, and if you have something else in mind, I'm game to customize a workshop or presentation for your group.")
     paths = [
-        ("School &amp; Library Visits", "For Kids", "img/teaching_kids-card_library-visit.jpg", 1600, 1066,
+        ("School &amp; Library Visits", "For Kids", "img/teaching_kids-card_library-visit.jpg", 1600, 1066, "Author Stephanie Watson standing with five kids.",
          "Supercharge a writing unit or kick off a literacy event with an author/illustrator visit or workshop. My teaching is built "
          "around the belief that every kid is a natural artist and storyteller.",
          "See options for kids", "for-kids.html"),
-        ("Workshops &amp; Presentations", "For Adults", "img/teaching_adults-card_confab-drawing-games.jpg", 1600, 1200,
+        ("Workshops &amp; Presentations", "For Adults", "img/teaching_adults-card_confab-drawing-games.jpg", 1600, 1200, "Adults participating in a Drawing Games workshop led by Stephanie Watson.",
          "I love leading drawing and writing workshops for adults at libraries, conferences, and creative organizations. Whether you've "
          "been making art for years or haven't picked up a pencil since third grade, my teaching aims to empower and inspire.",
          "See options for adults", "for-adults.html"),
     ]
-    cards = "".join(f"""<article class="option rv"><a class="option-img" href="{href}" tabindex="-1" aria-hidden="true"><img src="{src}" width="{w}" height="{h}" alt="" loading="lazy"></a>
+    cards = "".join(f"""<article class="option rv"><a class="option-img" href="{href}" tabindex="-1"><img src="{src}" width="{w}" height="{h}" alt="{alt}" loading="lazy"></a>
       <div class="body"><span class="eyebrow">{kick}</span><h2 class="h2-sm">{t}</h2><p>{p}</p><a class="btn btn-fill" href="{href}">{btn} {ARROW}</a></div></article>"""
-                    for kick, t, src, w, h, p, btn, href in paths)
+                    for kick, t, src, w, h, alt, p, btn, href in paths)
     q = [
         RAMGREN,
         ("I appreciated that Stephanie spoke at the students' level. She had great ideas for writing that were just right for my students.",
@@ -122,7 +122,8 @@ def teaching():
         ("Stephanie does a marvelous job of giving each student the opportunity to take the lead in developing their own ideas. She meets kids where they are, celebrates their ideas, and emphasizes that storytelling should be fun while helping students build confidence and strengthen their storytelling skills.",
          "—Lindsey Tscherne, Youth &amp; Family Programs Manager, American Swedish Institute"),
     ]
-    return f"""{hero_split("", "Teaching &amp; Speaking", intro, "img/teaching_intro_comics-workshop.jpg", 1200, 1019)}
+    return f"""{hero_split("", "Teaching &amp; Speaking", intro, "img/teaching_intro_comics-workshop.jpg", 1200, 1019,
+                        alt="Kids drawing in a workshop led by author and illustrator Stephanie Watson.")}
   <section class="wrap sec pt0">
     <div class="options two">{cards}</div>
   </section>
@@ -143,9 +144,9 @@ def _one_time_programs():
         _program("The Picture Book Process", 'In this highly visual presentation, I share each step of the process, including my rough drafts, editing the text, as well as the illustrator’s initial sketches and final artwork. Choose either <a href="best-friends-in-the-universe.html">Best Friends in the Universe</a> or <a href="behold-a-baby.html">Behold! A Baby</a>. Followed by a Q&amp;A.',
                  "K–8", "30–1,000 students", "45–60 min")
     workshops = _program("Raise the Stakes", "To grab readers’ attention and keep them hooked till the last page, your story needs high stakes. In this workshop, we’ll do fun group activities and writing exercises to practice upping the ante.",
-                         "2–8", "30–60 students", "45–60 min") + \
+                         "2–8", "10–60 students", "45–60 min") + \
         _program("Story Jars", "Do you ever sit down to start a story and find yourself staring at the blank page? Writing prompts, also known as story starters, can be a great way to get the ball rolling. As a group, we’ll create Story Jars–writing prompt tools that can remain in the classroom for future use.",
-                 "2–8", "30–60 students", "45–60 min")
+                 "2–8", "10–60 students", "45–60 min")
     return f"""<div class="program-cols">
       <div class="program-col"><div class="col-head rv"><h3 class="h2-sm">Presentations</h3><span class="kicker">(for 30–1,000 people)</span></div>{presentations}</div>
       <div class="program-col"><div class="col-head rv"><h3 class="h2-sm">Workshops</h3><span class="kicker">(for 10–60 people)</span></div>{workshops}</div>
@@ -169,12 +170,18 @@ def _residencies():
 
 
 KIDS_PAST_EVENTS = [
-    ("kids_past_mall-of-america-reading.jpg", 1440, 1440, "Storytime at the Mall of America", ""),
-    ("kids_past_saints-game.jpg", 1600, 898, "Reading at a St. Paul Saints game", ""),
-    ("kids_past_school-assembly.jpg", 1600, 1200, "School assembly", ""),
-    ("kids_past_edina-outdoor-storytime.jpg", 1600, 1200, "Outdoor storytime in Edina", ""),
-    ("grid_confab-drawings-held-up.jpg", 1600, 1200, "Drawing Games workshop at Confab Content Strategy Conference", ""),
-    ("kids_past_brainerd-book-club.jpg", 1600, 1066, "Book club in Brainerd, MN", ""),
+    ("kids_past_mall-of-america-reading.jpg", 1440, 1440, "Storytime at the Mall of America",
+     "Stephanie Watson reading her book Behold! A Baby to a group of kids and parents."),
+    ("kids_past_saints-game.jpg", 1600, 898, "Reading at a St. Paul Saints game",
+     "Stephanie Watson reading her book Best Friends in the Universe on the baseball field."),
+    ("kids_past_school-assembly.jpg", 1600, 1200, "School assembly",
+     "Author Stephanie Watson giving a school presentation."),
+    ("kids_past_edina-outdoor-storytime.jpg", 1600, 1200, "Outdoor storytime in Edina",
+     "Author Stephanie Watson leading a children’s storytime in Edina, Minnesota."),
+    ("kids_past_comics-lab-shareout.jpg", 1600, 1287, "Shareout from Comics Lab at Highland Park Summer School",
+     "Student artwork from the Comics Lab led by author and illustrator Stephanie Watson."),
+    ("kids_past_brainerd-book-club.jpg", 1600, 1066, "Book club in Brainerd, MN",
+     "Author Stephanie Watson standing with five kids."),
 ]
 
 
