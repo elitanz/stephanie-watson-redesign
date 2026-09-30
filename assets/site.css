@@ -309,6 +309,7 @@ h3.h3{font:700 clamp(20px,2vw,24px)/1.25 var(--display);margin:0 0 10px}
 /* Quotes grid (shared) */
 .quote-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.4vw,28px);align-items:start}
 .quote-grid .quote{margin-top:0!important}
+.quote-grid.two{align-items:stretch}
 .masonry{columns:2 340px;column-gap:clamp(16px,2.4vw,28px)}
 .masonry>*{break-inside:avoid;margin:0 0 clamp(16px,2.4vw,28px)!important;display:block}
 .masonry img{width:100%;border-radius:var(--radius);box-shadow:var(--shadow)}
@@ -445,3 +446,80 @@ button[type=submit][disabled]{opacity:.65;cursor:wait}
 @media (max-width:900px){
   .options.two,.quote-grid.two{grid-template-columns:1fr;max-width:600px;margin-left:auto;margin-right:auto}
 }
+
+/* ---------- Sept 2026 content update ---------- */
+/* Home: six book tiles, 3 across */
+.books{grid-template-columns:repeat(3,1fr);max-width:940px;margin:0 auto}
+@media (max-width:900px){.books{grid-template-columns:repeat(2,1fr)}}
+
+/* Page hero with a photo beside the intro */
+.hero-split{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(28px,5vw,72px);align-items:center}
+.hero-photo img{width:100%;border-radius:var(--radius);box-shadow:var(--shadow);aspect-ratio:4/3;object-fit:cover}
+@media (max-width:900px){.hero-split{grid-template-columns:1fr}}
+
+/* Partner logos: grayscale, same height */
+.partners .sec-head{margin-bottom:clamp(24px,4vw,40px)}
+.logos{list-style:none;margin:0 auto;padding:0;display:grid;align-items:center;justify-items:center}
+.logos li{display:flex;align-items:center;justify-content:center;width:100%;height:100%;padding:clamp(14px,2vw,22px)}
+.logos img{width:var(--w);height:auto;max-width:100%;opacity:.78}
+.logos.grid{grid-template-columns:repeat(4,1fr);max-width:1000px;gap:clamp(8px,2vw,20px) clamp(12px,3vw,32px)}
+.logos.strip{grid-template-columns:repeat(5,1fr);max-width:1060px;gap:clamp(8px,2vw,24px)}
+.logos.strip.six{grid-template-columns:repeat(6,1fr);max-width:1120px}
+.logos.strip img{width:calc(var(--w) * .9)}
+@media (max-width:900px){
+  .logos.grid{grid-template-columns:repeat(3,1fr)}
+  .logos.strip,.logos.strip.six{grid-template-columns:repeat(3,1fr)}
+}
+@media (max-width:520px){
+  .logos.grid,.logos.strip,.logos.strip.six{grid-template-columns:repeat(2,1fr)}
+  .logos img,.logos.strip img{width:calc(var(--w) * .72)}
+}
+
+/* For Kids: presentations | workshops columns */
+.program-cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,36px);align-items:start}
+.program-col{display:grid;gap:clamp(16px,2.4vw,24px)}
+.col-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;border-bottom:2px solid var(--line);padding-bottom:12px}
+.col-head .h2-sm{margin:0}
+.col-head .kicker{font:700 14px/1.35 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--rust-dark)}
+@media (max-width:900px){.program-cols{grid-template-columns:1fr}}
+
+/* Residencies band */
+.residencies{background:var(--sky);border-radius:clamp(24px,4vw,48px);margin:0 clamp(8px,1.5vw,20px)}
+.residency-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2.4vw,28px)}
+.residency{background:var(--white);border-radius:20px;padding:clamp(24px,3vw,34px);box-shadow:0 16px 36px -28px rgba(20,50,50,.5)}
+.residency .kicker{display:block;font:700 16px/1.3 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--rust-dark);margin-bottom:12px}
+.residency p{margin:0;color:var(--ink-2)}
+.residency-end{margin-top:clamp(28px,4vw,44px);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px 32px}
+.residency-end p{margin:0;font:700 clamp(18px,1.8vw,21px)/1.45 var(--display);max-width:52ch}
+@media (max-width:900px){.residency-grid{grid-template-columns:1fr}}
+
+/* For Adults: what I offer */
+.offers{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.4vw,26px);align-items:start}
+.offer{background:var(--white);border-radius:20px;padding:clamp(24px,3vw,32px);box-shadow:0 16px 36px -28px rgba(60,40,20,.55);display:flex;flex-direction:column}
+.offer h3{font:700 16px/1.3 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--rust-dark);margin:0 0 12px}
+.offer p{margin:0 0 14px;color:var(--ink-2)}
+.offer .ex-label{margin:0 0 6px;font-weight:700;color:var(--ink)}
+.examples{margin:0 0 16px;padding-left:1.15em;color:var(--ink-2)}
+.examples li{margin:.4em 0}
+.examples strong{color:var(--ink)}
+.offer .format{margin:0;padding-top:14px;border-top:1px solid var(--line);font:700 15px/1.45 var(--sans);color:var(--teal)}
+.offer .btn{margin-top:18px;align-self:flex-start}
+@media (max-width:1000px){.offers{grid-template-columns:1fr;max-width:680px}}
+
+/* Photo grid (3 x 2), opens larger on click */
+.photo-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,1.6vw,18px)}
+.photo-grid a{display:block;border-radius:14px;overflow:hidden;box-shadow:0 14px 30px -22px rgba(60,40,20,.55)}
+.photo-grid img{width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.photo-grid a:hover img{transform:scale(1.04)}
+@media (max-width:700px){.photo-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* About: two photos under the bio */
+.about-photos{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2.4vw,28px);margin-top:clamp(40px,6vw,72px)}
+.about-photos img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--radius);box-shadow:var(--shadow)}
+@media (max-width:600px){.about-photos{grid-template-columns:1fr}}
+
+/* Contact page: photo pair above the how-to card */
+.side-col{display:grid;gap:clamp(16px,2vw,24px)}
+.side-photos{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.side-photos img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:18px;box-shadow:0 14px 30px -22px rgba(60,40,20,.55)}
+.side-col .side-card .body{padding:26px}

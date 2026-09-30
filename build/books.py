@@ -135,7 +135,7 @@ def behold():
         cover_alt="Behold! A Baby book cover", zoom="img/BeholdABabyCover.jpg",
         desc=[
             "Step right up, step right up! Come see one of the most amazing, astounding, stunning and stupendous wonders of the world. Behold: a baby!",
-            "Prepared to be filled with wonder as the incredible baby performs feats such as smiling, eating a banana and babbling. There’s just one person in the audience who is unimpressed: The baby’s big brother.",
+            "Prepare to be filled with wonder as the incredible baby performs feats such as smiling, eating a banana and babbling. There’s just one person in the audience who is unimpressed: The baby’s big brother.",
         ],
         facts=["by Stephanie Watson", 'Illustrations by <a href="http://joyang.ca/artwork/" target="_blank" rel="noopener">Joy Ang</a>', "Bloomsbury", "For all ages"],
         awards=["2016 Minnesota Book Award finalist"],

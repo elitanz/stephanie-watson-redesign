@@ -21,7 +21,7 @@ NAV = [
         ("Elvis &amp; Olive", "elvis-olive.html"),
         ("Elvis &amp; Olive: Super Detectives", "elvis-olive-super-detectives.html"),
     ]),
-    ("Teaching", "teaching.html", "teaching", [
+    ("Teaching &amp; Speaking", "teaching.html", "teaching", [
         ("For Kids", "for-kids.html"),
         ("For Adults", "for-adults.html"),
     ]),
@@ -134,12 +134,12 @@ def contact_form():
       </form>"""
 
 
-def contact_section(lede=""):
-    """The dark 'Contact Stephanie' band that ends most pages. `lede` is that page's own intro line."""
+def contact_section(lede="", heading="Contact Stephanie"):
+    """The dark contact band that ends most pages. `lede` is that page's own intro line."""
     return f"""<section class="sec contact" id="contact">
     <div class="wrap contact-grid">
       <div class="rv">
-        <h2>Contact Stephanie</h2>
+        <h2>{heading}</h2>
         <p class="lede">{lede}</p>
       </div>
       <div class="rv">{contact_form()}</div>

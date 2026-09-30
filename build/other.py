@@ -12,7 +12,7 @@ def about():
     text = """<p>When I was five, my career ambition was to be a cake decorator. Making paintings you could eat, what could be better? As it turns out, I became a storyteller. I hope my five-year-old self is okay with this change in course.</p>
 <p>I read a lot when I was a kid. I also performed at the Minneapolis <a href="https://www.childrenstheatre.org/" target="_blank" rel="noopener">Children’s Theatre Company</a>. I was in Alice in Wonderland, Madeline’s Rescue, Babar, Pippi Longstocking, Pinocchio, The 500 Hats of Bartholomew Cubbins, A Wrinkle in Time and other plays. To balance out these enriching educational experiences, I also watched a lot of TV. For a while, my favorite show was called Small Wonder, about a little girl robot named Vicki who could lift a car over her head.</p>
 <p>Spending so much time immersed in stories as a kid did something to me, like in Batman, when that guy falls in a vat of chemical green goo and becomes the Joker. But instead of becoming a supervillain with diabolical plans, I became a storyteller determined to write and draw. Me and the Joker both like to laugh, though.</p>
-<p>I’ve written three middle-grade novels: <a href="pencilvania.html">Pencilvania</a>, <a href="elvis-olive.html">Elvis &amp; Olive</a> and <a href="elvis-olive-super-detectives.html">Elvis &amp; Olive: Super Detectives</a>. I also wrote the picture books <a href="best-friends-in-the-universe.html">Best Friends in the Universe</a>, <a href="behold-a-baby.html">Behold! A Baby</a> and <a href="the-wee-hours.html">The Wee Hours</a>.</p>
+<p>I’ve written three middle-grade novels: <a href="pencilvania.html">Pencilvania</a>, <a href="elvis-olive.html">Elvis &amp; Olive</a> and <a href="elvis-olive-super-detectives.html">Elvis &amp; Olive: Super Detectives</a>. I also wrote the picture books <a href="best-friends-in-the-universe.html">Best Friends in the Universe</a>, <a href="behold-a-baby.html">Behold! A Baby</a> and <a href="the-wee-hours.html">The Wee Hours</a>. And in 2028, my author-illustrator debut comes out. It’s called YES, A DRESS!</p>
 <p>A proud product of the Minneapolis Public Schools (Clara Barton Open, South High), I also attended Sarah Lawrence College in New York. I’ve been lucky to receive grants from the Minnesota State Arts Board and the Jerome Foundation. Currently, I live in Minneapolis, MN.</p>
 <p>In addition to writing stories, I also teach <a href="teaching.html">writing workshops</a> for children and adults.</p>"""
     return f"""{page_hero("About me")}
@@ -20,9 +20,13 @@ def about():
     <div class="book-layout about-layout">
       <div class="rv">
         <div class="prose">{text}</div>
-        <div class="btn-row"><a class="btn btn-fill" href="books.html">See Stephanie’s books {ARROW}</a><a class="btn btn-line" href="teaching.html">Teaching &amp; visits</a></div>
+        <div class="btn-row"><a class="btn btn-fill" href="books.html">Books {ARROW}</a><a class="btn btn-line" href="teaching.html">Teaching &amp; Speaking</a></div>
       </div>
-      <div class="book-aside rv"><div class="photo-wrap"><img src="img/StephanieWatsonAuthorMinnesota_BFITU-launch-scaled.jpeg" width="1400" height="933" alt="" style="aspect-ratio:4/5"></div></div>
+      <div class="book-aside rv"><div class="photo-wrap"><img src="img/about_portrait_2026.jpg" width="1200" height="1600" alt="Stephanie Watson" style="aspect-ratio:4/5;object-position:center 30%" fetchpriority="high"></div></div>
+    </div>
+    <div class="about-photos">
+      <img class="rv" src="img/about_photo_studio.jpg" width="1600" height="1278" alt="" loading="lazy">
+      <img class="rv" src="img/StephanieWatsonAuthorMinnesota_BFITU-launch-scaled.jpeg" width="1400" height="933" alt="" loading="lazy">
     </div>
   </section>
   {NEWSLETTER}
@@ -30,15 +34,20 @@ def about():
 
 
 def contact():
-    return f"""{page_hero("Contact Stephanie", "Ready to schedule a school or library visit, or want to inquire about fees? Have general questions or comments? I’d love to hear from you.")}
+    return f"""{page_hero("Contact Stephanie", "Interested in a workshop or presentation? Have general questions or comments? I’d love to hear from you.")}
   <section class="wrap sec pt0">
     <div class="contact-page">
       <div class="form-card rv">{contact_form()}</div>
-      <aside class="side-card rv">
-        <img src="img/055_Watson_web_cropped.jpg" width="382" height="455" alt="" loading="lazy" style="object-position:center 25%">
+      <aside class="side-col">
+        <div class="side-photos rv">
+          <img src="img/contact_sketchbook.jpg" width="1200" height="1600" alt="Stephanie Watson sketching on the beach">
+          <img src="img/contact_age-3-drawing.jpg" width="1045" height="1045" alt="Stephanie Watson at age three, beside her chalkboard drawing">
+        </div>
+        <div class="side-card rv">
         <div class="body"><strong>Want to write children’s books?</strong>
           <p>If you’re interested in becoming an author but aren’t sure where to start, these resources can help.</p>
           <a class="btn btn-fill btn-sm" href="how-to-become-an-author.html">Go {ARROW}</a></div>
+        </div>
       </aside>
     </div>
   </section>"""
@@ -103,8 +112,10 @@ def videos():
 # ---------------------------------------------------------------- portfolio
 PIECES = [
     # file, w, h, tags, lightbox title, visible caption, visible tag chips, alt
-    ("KnittingRaccoonMother_Child.jpg", 1500, 1018, "childrens character", "Oil pastels and graphite", "Children’s Illustration 1", ["Children’s illustration", "Character design"], "Illustration of a raccoon mother and child knitting, drawing in oil pastels"),
+    ("BugTeaParty_2026.jpg", 1000, 755, "childrens character", "Mixed media", "Mixed media", ["Children’s illustration", "Character design"], "Insects in fancy dress having a tea party"),
+    ("KnittingRaccoonMother_Child.jpg", 1500, 1018, "childrens character", "Oil pastel", "Oil pastel", ["Children’s illustration", "Character design"], "Illustration of a raccoon mother and child knitting, drawing in oil pastels"),
     ("RollerskatingOwl.jpg", 795, 1050, "childrens character", "Mixed media", "Mixed media", ["Children’s illustration", "Character design"], "Rollerskating owl created with mixed media"),
+    ("Frogs1_2026.jpg", 1600, 1253, "childrens character editorial", "Mixed media", "Mixed media", ["Children’s illustration", "Character design", "Editorial"], "Three green frogs"),
     ("ChameleonsKnitting.jpg", 1050, 755, "character childrens", "Oil pastel, acrylic gouache and colored pencil", "Oil pastel, acrylic gouache and colored pencil", ["Children’s illustration", "Character design"], "Oil pastel, acrylic gouache and colored pencil"),
     ("BlueWhale.jpg", 1200, 908, "editorial", "Oil pastel, acrylic gouache and colored pencil", "Oil pastel, acrylic gouache and colored pencil", ["Editorial"], "A blue whale"),
     ("RaccoonKnittingSocks.jpg", 765, 1050, "character childrens", "Oil pastel, acrylic gouache and colored pencil", "Oil pastel, acrylic gouache and colored pencil", ["Character design", "Children’s illustration"], "Raccoon knitting socks"),
@@ -112,9 +123,11 @@ PIECES = [
     ("Moths_oilpastel.jpg", 1050, 793, "editorial sketchbook", "Spotted lanternflies", "Spotted lanternflies in oil pastel", ["Editorial", "Sketchbook"], "Spotted lanternflies in oil pastel"),
     ("MCADFigureDrawing1.jpg", 1050, 761, "figure sketchbook", "Figure drawing", "Figure in oil pastel", ["Sketchbook", "Figure Drawing"], "Figure in oil pastel"),
     ("KnittingCrab_oilpastel.jpg", 1400, 1075, "character childrens editorial", "Oil pastel", "Oil pastels and acrylic gouache", ["Character design", "Children’s illustration", "Editorial"], "Knitting crab in oil pastel"),
-    ("BabyDeer_oilpastel.jpg", 750, 1060, "childrens", "Title of piece", "Title of piece", ["Children’s Illustration"], "Baby deer in oil pastel"),
+    ("BabyDeer_oilpastel.jpg", 750, 1060, "childrens", "Mixed media", "Mixed media", ["Children’s Illustration"], "Baby deer in oil pastel"),
     ("MCADFigureDrawing2.jpg", 1050, 771, "figure", "Oil pastel", "Oil pastel", ["Figure drawing"], "Figure drawing in oil pastel"),
     ("KoiatComo.jpg", 1019, 848, "sketchbook", "Koi fish", "Oil pastel in sketchbook", ["Sketchbook"], "Sketchbook page of koi fish in oil pastel"),
+    ("Hollyhock3.jpg", 1253, 1600, "sketchbook editorial", "Gouache and soft pastel", "Gouache and soft pastel", ["Sketchbook", "Editorial"], "Pink hollyhocks"),
+    ("PeggyFleming.jpg", 1208, 1600, "sketchbook editorial", "Mixed media", "Mixed media", ["Sketchbook", "Editorial"], "Figure skater Peggy Fleming"),
 ]
 
 
