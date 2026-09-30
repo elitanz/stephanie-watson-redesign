@@ -150,7 +150,6 @@ def contact_section(lede="", heading="Contact Stephanie"):
 def footer(ig_svg):
     return f"""<footer>
   <div class="wrap foot">
-    <img src="img/Wordmark_page-header_Aug2026_500px.jpg" width="500" height="234" alt="STEPHANIE WATSON" loading="lazy">
     <div class="foot-right">
       <span>© 2026 by Stephanie Watson</span>
       <a class="ig" href="https://www.instagram.com/thepennycarnival/" target="_blank" rel="noopener" aria-label="Instagram">{ig_svg}</a>

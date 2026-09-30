@@ -44,7 +44,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .menu-open .burger span:nth-child(3){top:22px;transform:rotate(-45deg)}
 
 /* Mobile menu overlay */
-.mnav{position:fixed;inset:0;z-index:60;background:var(--paper);padding:100px var(--gutter) 40px;overflow-y:auto;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
+.mnav{position:fixed;inset:0;z-index:60;background:var(--paper);padding:112px var(--gutter) 40px;overflow-y:auto;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
 .menu-open .mnav{opacity:1;visibility:visible}
 .mnav ul{list-style:none;margin:0;padding:0}
 .mnav>ul>li{border-bottom:1px solid var(--line)}
@@ -89,7 +89,7 @@ h2{font:700 clamp(30px,4.2vw,46px)/1.15 var(--display);margin:0;letter-spacing:-
 .portfolio{background:var(--sky);border-radius:clamp(24px,4vw,48px);margin:0 clamp(8px,1.5vw,20px)}
 .art-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(14px,2vw,24px)}
 .art{text-decoration:none;display:block}
-.art .frame{position:relative;border-radius:14px;overflow:hidden;aspect-ratio:4/5;background:#fff;box-shadow:0 14px 30px -20px rgba(20,50,50,.5)}
+.art .frame{position:relative;border-radius:14px;overflow:hidden;aspect-ratio:1;background:#fff;box-shadow:0 14px 30px -20px rgba(20,50,50,.5)}
 .art .frame img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
 .art:hover .frame img{transform:scale(1.06)}
 .art .view{position:absolute;left:12px;bottom:12px;background:rgba(255,255,255,.95);color:var(--ink);font:700 14px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;padding:9px 13px;border-radius:999px;opacity:0;transform:translateY(6px);transition:opacity .25s,transform .25s}
@@ -138,7 +138,7 @@ input:focus,textarea:focus{outline:none;border-color:#f0a37f;box-shadow:0 0 0 4p
 
 /* ---------- Footer ---------- */
 footer{padding:48px 0 40px}
-.foot{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.foot{display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap}
 .foot img{width:130px;mix-blend-mode:multiply}
 .foot-right{display:flex;align-items:center;gap:18px;color:var(--ink-2);font-size:15px}
 .ig{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--paper-2);transition:background .2s,color .2s}
@@ -167,10 +167,10 @@ footer{padding:48px 0 40px}
 }
 @media (max-width:700px){
   body{font-size:16px}
-  .header-in{height:84px}
-  .scrolled .header-in{height:68px}
-  .logo img{width:150px}
-  .scrolled .logo img{width:118px}
+  .header-in{height:96px}
+  .scrolled .header-in{height:78px}
+  .logo img{width:182px}
+  .scrolled .logo img{width:136px}
   /* portfolio becomes a swipeable row that stays inside the screen */
   .art-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;margin:0 calc(-1 * var(--gutter));padding:4px var(--gutter) 18px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
   .art-grid::-webkit-scrollbar{display:none}
@@ -523,3 +523,6 @@ button[type=submit][disabled]{opacity:.65;cursor:wait}
 .side-photos{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .side-photos img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:18px;box-shadow:0 14px 30px -22px rgba(60,40,20,.55)}
 .side-col .side-card .body{padding:26px}
+
+/* visually hidden, still read by search engines and screen readers */
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
