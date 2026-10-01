@@ -9,7 +9,7 @@ from chrome import ARROW, crumb, contact_section
 TEACHING_CRUMB = crumb("Teaching &amp; Speaking", "teaching.html")
 CONNECT = "Let’s connect"
 
-# Partner logos (img/logos/). Which logos go on each page, and their order, are from her content map.
+# Partner logos (img/logo-*). Which logos go on each page, and their order, are from her content map.
 LOGOS = {
     "asi": ("asi.png", 522, 240, "American Swedish Institute"),
     "mps": ("mps.png", 800, 122, "Minneapolis Public Schools"),
@@ -66,7 +66,7 @@ def logo_width(w, h):
 
 
 def logo_row(keys, cls):
-    items = "".join(f'<li><img src="img/logos/{f}" width="{w}" height="{h}" alt="{alt}" loading="lazy" style="--w:{logo_width(w, h)}px"></li>'
+    items = "".join(f'<li><img src="img/logo-{f}" width="{w}" height="{h}" alt="{alt}" loading="lazy" style="--w:{logo_width(w, h)}px"></li>'
                     for f, w, h, alt in (LOGOS[k] for k in keys))
     return f'<ul class="logos {cls} rv">{items}</ul>'
 

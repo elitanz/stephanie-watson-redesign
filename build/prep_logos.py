@@ -1,4 +1,4 @@
-"""Turn Stephanie's partner logos into matching one-color PNGs for the site (img/logos/).
+"""Turn Stephanie's partner logos into matching one-color PNGs for the site (img/logo-*, flat: her host uploads files, not folders).
 
 Each logo is trimmed to its edges, turned grayscale, stretched so its darkest ink is near-black,
 and recolored to the site's ink color on a transparent background, so they all sit evenly on
@@ -10,7 +10,7 @@ import os
 from PIL import Image, ImageOps
 
 SRC = os.path.expanduser("~/Downloads/Stephanie-Watson.com assets/Partner logos")
-OUT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "img", "logos")
+OUT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "img")
 INK = (42, 37, 33)       # --ink
 PAPER_CUTOFF = 240       # lighter than this counts as background
 MAX_H = 240              # 2x the largest display height
@@ -61,15 +61,15 @@ SVG_LOGOS = {
 
 
 def main():
-    os.makedirs(OUT, exist_ok=True)
+    os.makedirs(OUT, exist_ok=True)  # files are written as logo-<name>
     for src, (name, recolor) in SVG_LOGOS.items():
         with open(os.path.join(SRC, src), encoding="utf-8") as f:
             svg = recolor(f.read())
-        with open(os.path.join(OUT, name), "w", encoding="utf-8") as f:
+        with open(os.path.join(OUT, "logo-" + name), "w", encoding="utf-8") as f:
             f.write(svg)
         print(f"{name:32s} (svg)")
     for src, name in LOGOS.items():
-        w, h = convert(os.path.join(SRC, src), os.path.join(OUT, name))
+        w, h = convert(os.path.join(SRC, src), os.path.join(OUT, "logo-" + name))
         print(f"{name:32s} {w}x{h}")
 
 
