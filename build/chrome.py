@@ -34,8 +34,8 @@ NAV = [
     ]),
     ("Portfolio", "portfolio.html", "portfolio", []),
     ("About", "about.html", "about", [
-        ("Contact", "contact.html"),
         ("Videos", "videos.html"),
+        ("Contact", "contact.html"),
     ]),
     ("Newsletter", "https://thepennycarnival.substack.com/subscribe", "newsletter", []),
 ]
