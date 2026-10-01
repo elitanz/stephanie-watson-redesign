@@ -1,5 +1,7 @@
 """Shared page chrome: <head>, header + menus, contact section, footer."""
+import hashlib
 import html
+import os
 import re
 
 # Contact forms post here (FormSubmit.co). The first message ever sent triggers a one-time
@@ -10,8 +12,14 @@ SITE_DESC = ("Stephanie Watson is an author and illustrator who offers visits to
              "Twin Cities, greater Minnesota, and beyond. She also leads workshops for both kids and adults.")
 
 # (label, href, section-key, children)
+
+def asset(path):
+    """Asset URL with a content hash, so browsers fetch the new file after every change."""
+    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    with open(os.path.join(root, path), "rb") as f:
+        return f"{path}?v={hashlib.md5(f.read()).hexdigest()[:8]}"
+
 NAV = [
-    ("Home", "index.html", "home", []),
     ("Children’s Books", "index.html#books", "books", [
         ("Pencilvania", "pencilvania.html"),
         ("Best Friends in the Universe", "best-friends-in-the-universe.html"),
@@ -24,10 +32,12 @@ NAV = [
         ("For Kids", "for-kids.html"),
         ("For Adults", "for-adults.html"),
     ]),
-    ("About", "about.html", "about", []),
+    ("Portfolio", "portfolio.html", "portfolio", []),
+    ("About", "about.html", "about", [
+        ("Contact", "contact.html"),
+        ("Videos", "videos.html"),
+    ]),
     ("Newsletter", "https://thepennycarnival.substack.com/subscribe", "newsletter", []),
-    ("Videos", "videos.html", "videos", []),
-    ("Contact", "contact.html", "contact", []),
 ]
 
 CARET = ('<svg class="caret" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" '
@@ -68,7 +78,7 @@ def head(title, desc, og_image):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400;1,700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="{asset('assets/site.css')}">
 </head>
 <body>
 <script>document.documentElement.classList.add('js')</script>
@@ -159,7 +169,7 @@ def footer(ig_svg):
   <figure><img alt=""><figcaption></figcaption></figure>
   <button class="lb-btn lb-next" aria-label="Next"><svg viewBox="0 0 20 20"><path d="M8 4l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
 </div>
-<script src="assets/site.js"></script>
+<script src="{asset('assets/site.js')}"></script>
 </body>
 </html>
 """

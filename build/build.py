@@ -119,9 +119,9 @@ def page_table():
         "for-kids.html": ("Author & Illustrator Visits | School and Library Presentations | MN", "School and library presentations, writing workshops and residencies for kids with children’s author and illustrator Stephanie Watson.", "teaching", teaching.for_kids),
         "for-adults.html": ("Writing and Drawing Workshops for Adults" + SW, "Drawing and writing workshops, multi-session classes, talks and keynotes for adults with author and illustrator Stephanie Watson.", "teaching", teaching.for_adults),
         "about.html": ("About" + SW, "About Stephanie Watson, children’s book author and illustrator in Minneapolis, Minnesota.", "about", other.about),
-        "videos.html": ("Videos" + SW, "Behind-the-scenes and craft videos from children’s book author Stephanie Watson.", "videos", other.videos),
-        "contact.html": ("Contact" + SW, "Contact Stephanie Watson about workshops, presentations, school visits, or with general questions.", "contact", other.contact),
-        "portfolio.html": ("Portfolio" + SW, "Illustrations and artwork handmade by Stephanie Watson.", "home", other.portfolio),
+        "videos.html": ("Videos" + SW, "Behind-the-scenes and craft videos from children’s book author Stephanie Watson.", "about", other.videos),
+        "contact.html": ("Contact" + SW, "Contact Stephanie Watson about workshops, presentations, school visits, or with general questions.", "about", other.contact),
+        "portfolio.html": ("Portfolio" + SW, "Illustrations and artwork handmade by Stephanie Watson.", "portfolio", other.portfolio),
     }
 
 
@@ -142,7 +142,7 @@ def verify(files):
                 if "stephanie-watson.com" in ref:
                     problems.append(f"{fn}: still points at live site -> {ref}")
                 continue
-            target = ref.split("#")[0]
+            target = ref.split("#")[0].split("?")[0]
             if target and not os.path.exists(os.path.join(SITE, target)):
                 problems.append(f"{fn}: missing {ref}")
         for m in re.findall(r"srcset=\"([^\"]+)\"", s):
