@@ -50,6 +50,12 @@ def live_page(name):
 def write_checklist(names, files):
     """dist/UPLOAD-CHECKLIST.txt: exactly which folders to create in IONOS and what goes in each."""
     lines = [f"Upload checklist for {FOLDER} (IONOS Webspace Explorer uploads files, not folders)", "",
+             "Before you start:",
+             f"- Double-click the zip. It makes a folder called {FOLDER}; upload what's inside it.",
+             "- .htaccess is hidden on a Mac. In Finder press Cmd+Shift+. (period) to show it.",
+             "  It holds the redirects from the old addresses, so it must be uploaded.",
+             "- In Webspace Explorer, create each folder below first, open it, then upload its files.",
+             "  You can select many files at once (Cmd+A selects all in a Finder folder).", "",
              f"1. Create the folder {FOLDER}. Upload these {len(names) + 2} files into it:",
              "   .htaccess   (hidden on a Mac: press Cmd+Shift+. in Finder to see it)", "   robots.txt"]
     lines += [f"   {n}" for n in names]
